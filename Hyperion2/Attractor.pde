@@ -2,24 +2,17 @@
 
 // A class for a draggable attractive body in our world
 
-class Attractor {
-  float mass;    // Mass, tied to size
+class Attractor extends Draggable {
   float G;       // Gravitational Constant
-  PVector position;   // position
-  boolean dragging = false; // Is the object being dragged?
-  boolean rollover = false; // Is the mouse over the ellipse?
-  PVector drag;  // holds the offset for when object is clicked on
 
-  Attractor(PVector l_,float m_, float g_) {
-    position = l_.get();
-    mass = m_;
-    G = g_;
-    drag = new PVector(0.0,0.0);
+  Attractor(PVector _position, float _m, float _g) {
+    super(_position.x,_position.y,_m);
+    G = _g;
   }
 
   void go() {
-    render();
-    drag();
+    render(); //<>//
+    drag(mouseX,mouseY);
   }
 
   PVector attract(MoverWithBoundariesAndAttraction c) {
@@ -36,42 +29,9 @@ class Attractor {
   void render() {
     ellipseMode(CENTER);
     stroke(0,100);
-    if (dragging) fill (50);
-    else if (rollover) fill(100);
+    if (isDragging()) fill (50);
+    else if (isRollover()) fill(100);
     else fill(175,50);
-    ellipse(position.x,position.y,mass*2,mass*2);
+    ellipse(position.x,position.y,mass*2,mass*2); //<>//
   }
-
-  // The methods below are for mouse interaction
-  void clicked(int mx, int my) {
-    float d = dist(mx,my,position.x,position.y);
-    if (d < mass) {
-      dragging = true;
-      drag.x = position.x-mx;
-      drag.y = position.y-my;
-    }
-  }
-
-  void rollover(int mx, int my) {
-    float d = dist(mx,my,position.x,position.y);
-    if (d < mass) {
-      rollover = true;
-    } else {
-      rollover = false;
-    }
-  }
-
-  void stopDragging() {
-    dragging = false;
-  }
-  
- 
-
-  void drag() {
-    if (dragging) {
-      position.x = mouseX + drag.x;
-      position.y = mouseY + drag.y;
-    }
-  }
-
 }

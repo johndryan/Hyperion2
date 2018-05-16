@@ -162,11 +162,13 @@ class MoverWithBoundariesAndAttraction extends MoverWithBoundaries {
 // DRAGGABLE OBJECT ------------------------------------ //
 
 class Draggable extends Mover {
-  PVector dragOffset;
-  boolean dragging = false;
+  boolean dragging = false; // Is the object being dragged?
+  boolean rollover = false; // Is the mouse over the ellipse?
+  PVector dragOffset;  // holds the offset for when object is clicked on
   
   Draggable(float x, float y, float _m) {
-    super(x,y,_m);
+    super(x,y,_m); //<>//
+    dragOffset = new PVector(0.0,0.0);
   }
   
   void clicked(int mx, int my) {
@@ -179,6 +181,15 @@ class Draggable extends Mover {
     }
   }
 
+  void rollover(int mx, int my) {
+    float d = dist(mx,my,position.x,position.y);
+    if (d < mass) {
+      rollover = true;
+    } else {
+      rollover = false;
+    }
+  }
+
   void stopDragging() {
     dragging = false;
   }
@@ -188,6 +199,14 @@ class Draggable extends Mover {
       position.x = mx + dragOffset.x;
       position.y = my + dragOffset.y;
     }
+  }
+
+  // Getters & Setters
+  boolean isDragging() {
+    return dragging;
+  }
+  boolean isRollover() {
+    return rollover;
   }
   
   // TODO: Needs a method to handle display when dragged?

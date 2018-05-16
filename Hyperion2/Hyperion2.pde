@@ -13,8 +13,8 @@ void setup() {
 
 void draw() {
   background(255);
-  //a.rollover(mouseX,mouseY);
   for (int i = 0; i < attractors.length; i++) {
+    attractors[i].rollover(mouseX,mouseY);
     attractors[i].go();
   }
   
@@ -23,13 +23,22 @@ void draw() {
   }
 }
 
-//void mousePressed() {
-//  a.clicked(mouseX,mouseY);
-//}
+// MOUSE INTERACTIONS ------------------------------------ //
 
-//void mouseReleased() {
-//  a.stopDragging();
-//}
+void mousePressed() {
+  for (int i = 0; i < attractors.length; i++) {
+    attractors[i].clicked(mouseX,mouseY);
+  }
+}
+
+void mouseReleased() {
+  for (int i = 0; i < attractors.length; i++) {
+    attractors[i].stopDragging();
+  }
+}
+
+// SETUP FUNCTIONS ------------------------------------ //
+// TODO: put these inside Manager/Factory Objects?
 
 void setupCreatures() {
   for (int i = 0; i < Creatures.length; i++) {
