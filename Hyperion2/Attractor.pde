@@ -22,7 +22,7 @@ class Attractor {
     drag();
   }
 
-  PVector attract(Crawler c) {
+  PVector attract(Creature c) {
     PVector dir = PVector.sub(pos,c.pos);        // Calculate direction of force
     float d = dir.mag();                              // Distance between objects
     d = constrain(d,5.0,25.0);                        // Limiting the distance to eliminate "extreme" results for very close or very far objects

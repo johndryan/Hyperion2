@@ -2,13 +2,13 @@
 // Built on code and ideas from Daniel Shiffman's http://natureofcode.com
 Boolean debugging = true;
 
-Crawler[] crawlers = new Crawler[6];
+Creature[] Creatures = new Creature[6];
 Attractor[] attractors = new Attractor[5];
 
 void setup() {
   size(1024,768);
   setupAttractors();
-  setupCrawlers();
+  setupCreatures();
 }
 
 void draw() {
@@ -18,8 +18,8 @@ void draw() {
     attractors[i].go();
   }
   
-  for (int i = 0; i < crawlers.length; i++) {
-    crawlers[i].go();
+  for (int i = 0; i < Creatures.length; i++) {
+    Creatures[i].go();
   }
 }
 
@@ -31,9 +31,9 @@ void draw() {
 //  a.stopDragging();
 //}
 
-void setupCrawlers() {
-  for (int i = 0; i < crawlers.length; i++) {
-    crawlers[i] = new Crawler(getRandomAttractor());
+void setupCreatures() {
+  for (int i = 0; i < Creatures.length; i++) {
+    Creatures[i] = new Creature(getRandomAttractor());
   }
 }
   

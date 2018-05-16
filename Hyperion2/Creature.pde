@@ -1,9 +1,9 @@
-// Crawler //<>// //<>//
+// Creature //<>// //<>//
 
 // A class to describe a thing in our world, has vectors for position, velocity, and acceleration
 // Also includes scalar values for mass, maximum velocity, and elasticity
 
-class Crawler {
+class Creature {
   float maxSpeed = 2;
   float targetProximity = 200;
   float massMin = 8;
@@ -17,7 +17,7 @@ class Crawler {
   Attractor target;
   CreatureTail tail;
 
-  Crawler(Attractor _target) {
+  Creature(Attractor _target) {
     target = _target;
     acc = new PVector();
     vel = new PVector(random(-1, 1), random(-1, 1));
@@ -60,7 +60,7 @@ class Crawler {
 
     // Get attraction force
     PVector f = target.attract(this);
-    // Apply that force to the Crawler
+    // Apply that force to the Creature
     applyForce(f);
   }
 
