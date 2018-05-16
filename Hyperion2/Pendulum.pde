@@ -15,6 +15,7 @@ class Pendulum  {
   float angle;         // Pendulum arm angle
   float aVelocity;     // Angle velocity
   float aAcceleration; // Angle acceleration
+  float spineGravityAcceleration; // Acceleration from spine, modelled on pendulum acted on by gravity
   float damping;       // Arbitary damping amount
 
   // This constructor could be improved to allow a greater variety of pendulums
@@ -27,7 +28,7 @@ class Pendulum  {
 
     aVelocity = 0.0;
     aAcceleration = 0.0;
-    damping = 0.995;   // Arbitrary damping
+    damping = 0.8;   // Arbitrary damping
   }
 
   void go() {
@@ -38,10 +39,17 @@ class Pendulum  {
   // Function to update position
   void update() {
     float gravity = 0.4;                              // Arbitrary constant
-    aAcceleration = (-1 * gravity / r) * sin(angle);  // Calculate acceleration (see: http://www.myphysicslab.com/pendulum1.html)
+    spineGravityAcceleration = (-1 * gravity / r) * sin(angle);  // Calculate acceleration (see: http://www.myphysicslab.com/pendulum1.html)
+    aAcceleration += spineGravityAcceleration; 
     aVelocity += aAcceleration;                 // Increment velocity
     aVelocity *= damping;                       // Arbitrary damping
     angle += aVelocity;                         // Increment angle
+    println("PART ?:aAcceleration =   " + aAcceleration);
+    aAcceleration = 0.0;
+  }
+
+  void applyAngularAcceleration(float angularAcceleration) {
+    aAcceleration += angularAcceleration;
   }
 
   void display() {

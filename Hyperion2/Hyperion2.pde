@@ -1,6 +1,6 @@
 // Hyperion 2.0
 // Built on code and ideas from Daniel Shiffman's http://natureofcode.com
-Boolean debugging = true;
+Boolean debugging = false;
 
 Creature[] Creatures = new Creature[6];
 Attractor[] attractors = new Attractor[5];

@@ -1,4 +1,4 @@
-// Creature //<>// //<>//
+// Creature
 
 // A class to describe a thing in our world, has vectors for position, velocity, and acceleration
 // Also includes scalar values for mass, maximum velocity, and elasticity
@@ -47,6 +47,8 @@ class Creature {
       vel.mult(maxSpeed);
     }
     pos.add(vel);
+    // Pass acceleration to tail
+    tail.applyForce(acc);
     // Multiplying by 0 sets the all the components to 0
     acc.mult(0);
   }
@@ -76,7 +78,7 @@ class Creature {
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(angle);
-    scale(mass/massMax);
+    scale(mass/massMax*2);
 
     drawHead();
     translate(-6, 0);
@@ -91,7 +93,8 @@ class Creature {
     fill(175, 100);
     pushMatrix();
     rotate(radians(90));
-    triangle(0, -20, -16, 12, 16, 12);
+    //triangle(0, -20, -16, 12, 16, 12);
+    triangle(0, -massMax*1.25, -massMax, massMax*0.75, massMax, massMax*0.75);
     popMatrix();
 
     //Debugging Vizualisations

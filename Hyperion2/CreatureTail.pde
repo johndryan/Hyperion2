@@ -4,11 +4,9 @@ class CreatureTail {
   
   Pendulum[] parts;
   float partRadius = 30;
+  float partDamping = 0.99;
+  float aAcceleration;
   
-  // Because we are going to oscillate along the x and y axis we can use PVector for two angles, amplitudes, etc.!
-  float theta;
-  float amplitude;
-
   CreatureTail(int numParts) {
     parts = new Pendulum[numParts];
     for(int i=0; i < numParts; i++){
@@ -16,6 +14,7 @@ class CreatureTail {
       float thisPartRadius = partRadius*(numParts-i/2)/numParts;
       parts[i] = new Pendulum(new PVector(0,0),thisPartRadius);
     }
+    aAcceleration = 0.0;
   }
 
   void go() {
@@ -26,8 +25,19 @@ class CreatureTail {
   // Update Tail Parts
   void update() {
     for(int i=0; i < parts.length; i++){
+      parts[i].applyAngularAcceleration(aAcceleration);
+      println("PART "+i+":aAcceleration =   " + aAcceleration);
       parts[i].update();
+      aAcceleration *= partDamping;
     }
+    aAcceleration = 0.0;
+  }
+
+  void applyForce(PVector force) {
+    PVector f = force.copy();
+    Float angularAcceleration = f.heading();
+    aAcceleration += angularAcceleration * 0.002;
+    println("TAIL:  aAcceleration =   " + aAcceleration);
   }
 
   // Display based on a position
