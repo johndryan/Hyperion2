@@ -2,7 +2,7 @@
 // Built on code and ideas from Daniel Shiffman's http://natureofcode.com
 Boolean debugging = false;
 
-Creature[] Creatures = new Creature[6];
+Creature[] creatures = new Creature[6];
 Attractor[] attractors;
 
 void setup() {
@@ -13,36 +13,32 @@ void setup() {
 
 void draw() {
   background(255);
-  for (int i = 0; i < attractors.length; i++) {
-    attractors[i].rollover(mouseX,mouseY);
-    attractors[i].go();
+  for (Attractor a : attractors) {
+    a.rollover(mouseX,mouseY);
+    a.go();
   }
   
-  for (int i = 0; i < Creatures.length; i++) {
-    Creatures[i].go();
+  for (Creature c : creatures) {
+    c.go();
   }
 }
 
 // MOUSE INTERACTIONS ------------------------------------ //
 
 void mousePressed() {
-  for (int i = 0; i < attractors.length; i++) {
-    attractors[i].clicked(mouseX,mouseY);
-  }
+  for (Attractor a : attractors) a.clicked(mouseX,mouseY);
 }
 
 void mouseReleased() {
-  for (int i = 0; i < attractors.length; i++) {
-    attractors[i].stopDragging();
-  }
+  for (Attractor a : attractors) a.stopDragging();
 }
 
 // SETUP FUNCTIONS ------------------------------------ //
 // TODO: put these inside Manager/Factory Objects?
 
 void setupCreatures() {
-  for (int i = 0; i < Creatures.length; i++) {
-    Creatures[i] = new Creature(getRandomAttractor());
+  for (int i = 0; i < creatures.length; i++) {
+    creatures[i] = new Creature(getRandomAttractor());
   }
 }
   
