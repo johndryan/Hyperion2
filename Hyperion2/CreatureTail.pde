@@ -1,5 +1,3 @@
-// Oscillator
-
 class CreatureTail {
   
   Pendulum[] parts;
