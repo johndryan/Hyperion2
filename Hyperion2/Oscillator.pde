@@ -1,8 +1,4 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Attraction Array with Oscillating objects around each thing
+// Oscillator
 
 class Oscillator {
   

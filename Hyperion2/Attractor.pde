@@ -1,7 +1,3 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
 // Attraction
 
 // A class for a draggable attractive body in our world
